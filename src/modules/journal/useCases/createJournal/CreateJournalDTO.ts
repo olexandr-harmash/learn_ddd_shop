@@ -1,24 +1,11 @@
-interface CreateJournalDTO {
-    title: string;
-    author: string;
-    volumes: CreateVolumeDTO[];
-    coverTitle: string;
-}
-
-interface CreateChapterDTO {
-    title: string;
-    sheets: CreateSheetDTO[];
-    pageCount: number;
-    chapterNumber: number;
-}
-
 interface CreateSheetDTO {
     fileName: string;
     pageNumber: number;
 }
 
-interface CreateVolumeDTO {
+interface CreateJournalDTO {
     title: string;
-    number: string;
-    chapters: CreateChapterDTO[];
+    author: string;
+    sheets: CreateSheetDTO[];
+    coverTitle: string;
 }

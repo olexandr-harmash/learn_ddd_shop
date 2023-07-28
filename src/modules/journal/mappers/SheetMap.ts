@@ -25,12 +25,12 @@ export class SheetMap implements Mapper<Sheet> {
         }
     }
 
-    public static toDomain(raw: any): Sheet | undefined | null {
+    public static toDomain(raw: any): Sheet | undefined {
         const sheetOrError = Sheet.create({
             fileName: raw.fileName,
             pageNumber: raw.pageNumber
         }, new UniqueEntityID(raw.id))
 
-        return sheetOrError.isSuccess ? sheetOrError.getValue() : null;
+        return sheetOrError.isSuccess ? sheetOrError.getValue() : undefined;
     }
 }

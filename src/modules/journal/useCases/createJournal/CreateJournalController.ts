@@ -21,53 +21,16 @@ export class CreateJournalController extends BaseController {
         this.useCase = useCase;
     }
 
-    /**
-     * Validates the CreateSheetDTO object.
-     * @param dto - The CreateSheetDTO object to validate.
-     * @returns True if the DTO is valid; otherwise, false.
-     */
     private isValidCreateSheetDTO(dto: CreateSheetDTO): boolean {
         return typeof dto.fileName === 'string' && typeof dto.pageNumber === 'number' && dto.pageNumber >= 0;
     }
 
-    /**
-     * Validates the CreateChapterDTO object.
-     * @param dto - The CreateChapterDTO object to validate.
-     * @returns True if the DTO is valid; otherwise, false.
-     */
-    private isValidCreateChapterDTO(dto: CreateChapterDTO): boolean {
-        return (
-            typeof dto.title === 'string' &&
-            typeof dto.pageCount === 'number' && dto.pageCount >= 0 &&
-            typeof dto.chapterNumber === 'number' && dto.chapterNumber >= 0 &&
-            Array.isArray(dto.sheets) && dto.sheets.every((sheet) => this.isValidCreateSheetDTO(sheet))
-        );
-    }
-
-    /**
-     * Validates the CreateVolumeDTO object.
-     * @param dto - The CreateVolumeDTO object to validate.
-     * @returns True if the DTO is valid; otherwise, false.
-     */
-    private isValidCreateVolumeDTO(dto: CreateVolumeDTO): boolean {
-        return (
-            typeof dto.title === 'string' &&
-            typeof dto.number === 'number' && dto.number >= 0 &&
-            Array.isArray(dto.chapters) && dto.chapters.every((chapter) => this.isValidCreateChapterDTO(chapter))
-        );
-    }
-
-    /**
-     * Validates the CreateJournalDTO object.
-     * @param dto - The CreateJournalDTO object to validate.
-     * @returns True if the DTO is valid; otherwise, false.
-     */
     private isValidCreateJournalDTO(dto: CreateJournalDTO): boolean {
         return (
             typeof dto.title === 'string' &&
             typeof dto.author === 'string' &&
             typeof dto.coverTitle === 'string' &&
-            Array.isArray(dto.volumes) && dto.volumes.every((volume) => this.isValidCreateVolumeDTO(volume))
+            Array.isArray(dto.sheets) && dto.sheets.every((sheet) => this.isValidCreateSheetDTO(sheet))
         );
     }
 

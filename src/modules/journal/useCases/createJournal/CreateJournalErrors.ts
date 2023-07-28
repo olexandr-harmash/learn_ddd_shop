@@ -15,4 +15,11 @@ export namespace CreateJournalErrors {
             } as UseCaseError)
         }
     }
+    export class CreateEntityError extends Result<UseCaseError> {
+        constructor(details: string) {
+            super(false, {
+                message: `Error during creating ${details}`
+            } as UseCaseError)
+        }
+    }
 }

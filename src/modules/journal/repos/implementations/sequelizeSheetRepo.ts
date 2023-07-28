@@ -1,5 +1,4 @@
 // Import required modules and classes
-import { Sequelize } from "sequelize";
 import models from "../../../../shared/infra/database/sequelize/models";
 import { Sheet } from "../../domain/Sheet";
 import { ISheetRepo } from "../SheetRepo";
@@ -12,16 +11,14 @@ import { SheetMap } from "../../mappers/SheetMap";
  */
 export class SheetRepoImpl implements ISheetRepo {
     private _models: typeof models;
-    private _connection: Sequelize;
 
     /**
      * SheetRepoImpl constructor.
      * @param mod - An instance of Sequelize models.
      * @param conn - The Sequelize database connection.
      */
-    constructor(mod: typeof models, conn: Sequelize) {
+    constructor(mod: typeof models) {
         this._models = mod;
-        this._connection = conn;
     }
 
     /**
@@ -29,15 +26,31 @@ export class SheetRepoImpl implements ISheetRepo {
      * @param sheets - An array of Sheet objects to be saved.
      * @returns A promise that resolves to the saved array of Sheet objects.
      */
-    async saveCollection(sheets: Sheet[]): Promise<Sheet[]> {
+    async saveCollection(sheets: Sheet[], journalId: string): Promise<Sheet[]> {
         const SheetModel = this._models.Sheet;
 
         const sheetsResult = await SheetModel.bulkCreate(
             sheets.map(SheetMap.toPersistence),
             { ignoreDuplicates: false }
         );
+        
+        if (!sheetsResult) {
+            throw new Error('Something with creating sheet models')
+        }
 
-        return sheets;
+        const result = sheetsResult.map((v) => {
+            v.setJournal(journalId)
+            
+            return SheetMap.toDomain(v)
+        })
+        
+        const isFailure = result.every(v=>!v)
+
+        if (isFailure) {
+            throw new Error('Something with creating sheet models')
+        }
+
+        return result as Sheet[]
     }
 
     /**

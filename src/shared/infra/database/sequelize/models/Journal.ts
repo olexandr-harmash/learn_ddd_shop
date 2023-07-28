@@ -10,7 +10,8 @@ import {
 } from "sequelize";
 
 import sequelizeConnection from "../config/config";
-import Volume from "./Volume";
+
+import Sheet, { SheetOutput } from "./Sheet";
 
 // Интерфейс для атрибутов Журнала
 interface JournalAttributes {
@@ -24,7 +25,9 @@ interface JournalAttributes {
 interface JournalInput extends Optional<JournalAttributes, 'id'> { }
 
 // Интерфейс для выходных данных Журнала
-interface JournalOutput extends Required<JournalAttributes> { }
+interface JournalOutput extends Required<JournalAttributes> {
+    sheets?: SheetOutput[];
+ }
 
 // Модель Журнала
 export default class Journal extends Model<JournalOutput, JournalInput> implements JournalAttributes {
@@ -34,15 +37,15 @@ export default class Journal extends Model<JournalOutput, JournalInput> implemen
     declare coverTitle: string;
 
     // Описание методов связей
-    declare getVolumes: HasManyGetAssociationsMixin<Volume>;
-    declare addVolume: HasManyAddAssociationMixin<Volume, number>;
-    declare removeVolume: HasManyRemoveAssociationMixin<Volume, number>;
-    declare removeVolumes: HasManyRemoveAssociationsMixin<Volume, number>;
-    declare setVolumes: HasManySetAssociationsMixin<Volume, number>;
+    declare getSheets: HasManyGetAssociationsMixin<Sheet>;
+    declare addSheet: HasManyAddAssociationMixin<Sheet, string>;
+    declare removeSheet: HasManyRemoveAssociationMixin<Sheet, string>;
+    declare removeSheets: HasManyRemoveAssociationsMixin<Sheet, string>;
+    declare setSheets: HasManySetAssociationsMixin<Sheet, string>;
 
     public static // Определение связей с Томами и Главами
         associate = (models: any) => {
-            Journal.hasMany(models.Volume, { foreignKey: 'journalId', onDelete: 'CASCADE' });
+            Journal.hasMany(models.Sheet, { foreignKey: 'journalId', onDelete: 'CASCADE' });
         };
     static removeVolumes: any;
 }

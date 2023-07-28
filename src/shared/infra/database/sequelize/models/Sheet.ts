@@ -6,6 +6,10 @@ import {
 
 import sequelizeConnection from "../config/config";
 
+import Journal from "./Journal";
+
+import { HasOneSetAssociationMixin } from "sequelize";
+
 // Интерфейс для атрибутов Листа
 interface SheetAttributes {
     id: string;
@@ -18,7 +22,9 @@ interface SheetAttributes {
 interface SheetInput extends Optional<SheetAttributes, 'id'> { }
 
 // Интерфейс для выходных данных Листа
-interface SheetOutput extends Required<SheetAttributes> { }
+export interface SheetOutput extends Required<SheetAttributes> { 
+    journalId?: string;
+}
 
 // Модель Листа
 export default class Sheet extends Model<SheetOutput, SheetInput> implements SheetAttributes {
@@ -26,9 +32,11 @@ export default class Sheet extends Model<SheetOutput, SheetInput> implements She
     declare fileName: string;
     declare pageNumber: number;
 
+    declare setJournal: HasOneSetAssociationMixin<Journal, string>;
+
     public static // Определение связей с Томами и Главами
         associate = (models: any) => {
-            Sheet.belongsTo(models.Chapter, { foreignKey: 'chapterId', onDelete: 'CASCADE' })
+            Sheet.belongsTo(models.Journal, { foreignKey: 'journalId', onDelete: 'CASCADE' })
         };
 }
 

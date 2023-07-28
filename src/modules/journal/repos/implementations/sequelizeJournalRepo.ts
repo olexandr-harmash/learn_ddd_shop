@@ -1,12 +1,9 @@
 // Import required modules and classes
-import { Sequelize } from "sequelize";
 import models from "../../../../shared/infra/database/sequelize/models";
 import { Journal } from "../../domain/Journal";
 import { JournalMap } from "../../mappers/JournalMap";
 import { IJournalRepo } from "../JournalRepo";
-import { IVolumeRepo } from "../VolumeRepo";
-import { Volume } from "../../domain/Volume";
-
+import { ISheetRepo } from "../SheetRepo";
 /**
  * Journal Repository Implementation (JournalRepoImpl)
  * A class that provides methods to interact with the database for journal-related operations.
@@ -14,8 +11,7 @@ import { Volume } from "../../domain/Volume";
  */
 export class JournalRepoImpl implements IJournalRepo {
     private _models: typeof models;
-    private _connection: Sequelize;
-    private _volumesRepo: IVolumeRepo;
+    private _sheetRepo: ISheetRepo;
 
     /**
      * JournalRepoImpl constructor.
@@ -23,22 +19,9 @@ export class JournalRepoImpl implements IJournalRepo {
      * @param conn - The Sequelize database connection.
      * @param volumeRepo - An instance of the Volume Repository.
      */
-    constructor(mod: typeof models, conn: Sequelize, volumeRepo: IVolumeRepo) {
+    constructor(mod: typeof models, sheetRepo: ISheetRepo) {
         this._models = mod;
-        this._connection = conn;
-        this._volumesRepo = volumeRepo;
-    }
-
-    /**
-     * Sets the volumes for a given sequelizeJournalModel.
-     * @param sequelizeJournalModel - The Sequelize journal model instance.
-     * @param volumes - An array of Volume objects to be associated with the journal.
-     * @returns A promise that resolves to an array containing the result of setting the volumes.
-     */
-    private async setJournalVolumes(sequelizeJournalModel: any, volumes: Volume[]): Promise<any[]> {
-        if (!sequelizeJournalModel || volumes.length === 0) return [];
-
-        return sequelizeJournalModel.setVolumes(volumes.map((v) => v.id.toString()));
+        this._sheetRepo = sheetRepo;
     }
 
     /**
@@ -65,18 +48,28 @@ export class JournalRepoImpl implements IJournalRepo {
      */
     async save(journal: Journal): Promise<Journal> {
         const JournalModel = this._models.Journal;
-        const rawJournal: any = JournalMap.toPersistence(journal);
 
         try {
-            const volumeResult = await this._volumesRepo.saveCollection(journal.volumes);
+            const rawJournal = JournalMap.toPersistence(journal);
 
             const journalResult = await JournalModel.create(rawJournal);
 
-            await this.setJournalVolumes(journalResult, volumeResult);
-        } catch (err) {
-            throw err;
+            if (!journalResult) {
+                throw new Error('Something with creating journal models')
+            }
+
+            const sheetResult = await this._sheetRepo.saveCollection(journal.sheets, journalResult.id);
+        } catch (err: any) {
+            JournalModel.destroy()
+            throw new Error(err.toString());
         }
 
-        return journal;
+        const journalResult = JournalMap.toDomain(journal);
+
+        if (!journalResult) {
+            throw new Error('Something with creating journal domain')
+        }
+
+        return journalResult as Journal;
     }
 }

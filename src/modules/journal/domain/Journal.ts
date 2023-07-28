@@ -1,5 +1,3 @@
-import { Volume } from "./Volume";
-
 import {
     Guard
 } from "../../../shared/core/Guard";
@@ -16,10 +14,12 @@ import {
     UniqueEntityID
 } from "../../../shared/domain/UniqueEntityID";
 
+import { Sheet } from "./Sheet";
+
 interface JournalProps {
     title: string;
     author: string;
-    volumes: Volume[];
+    sheets?: Sheet[];
     coverTitle: string;
 }
 
@@ -36,8 +36,8 @@ export class Journal extends AggregateRoot<JournalProps> {
         return this.props.author;
     }
 
-    get volumes(): Volume[] {
-        return this.props.volumes;
+    get sheets(): Sheet[] {
+        return this.props.sheets ?? [];
     }
 
     get coverTitle(): string {

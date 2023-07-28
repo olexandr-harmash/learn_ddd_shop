@@ -13,9 +13,9 @@ services:
     image: postgres
     restart: always
     environment:
-      PGDATA: /var/lib/postgresql/data/pgdata2
+      PGDATA: /var/lib/postgresql/data/pgdata3
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: manga_3_test
+      POSTGRES_DB: manga_4_test
     volumes:
       - pg-data:/var/lib/postgresql/data
 

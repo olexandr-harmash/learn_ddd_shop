@@ -8,11 +8,7 @@ import {
     Journal
 } from "../domain/Journal";
 
-import {
-    VolumeMap
-} from "./VolumeMap";
-
-
+import { SheetMap } from "./SheetMap";
 
 export class JournalMap implements Mapper<Journal> {
     public static toDTO(journal: Journal): JournalDTO {
@@ -21,7 +17,7 @@ export class JournalMap implements Mapper<Journal> {
             title: journal.title,
             author: journal.author,
             coverTitle: journal.coverTitle,
-            volumes: journal.volumes.map(VolumeMap.toDTO)
+            sheets: journal.sheets.map(SheetMap.toDTO)
         }
     }
 
@@ -31,18 +27,18 @@ export class JournalMap implements Mapper<Journal> {
             title: journal.title,
             author: journal.author,
             coverTitle: journal.coverTitle,
-            volumes: journal.volumes.map(VolumeMap.toPersistence)
+            sheets: journal.sheets.map(SheetMap.toPersistence)
         }
     }
 
-    public static toDomain(raw: any): Journal | undefined | null {
+    public static toDomain(raw: any): Journal | undefined {
         const journalOrError = Journal.create({
             title: raw.title,
-            volumes: raw.volumes.map(VolumeMap.toDomain),
+            sheets: raw.sheets.map(SheetMap.toDomain),
             author: raw.author,
             coverTitle: raw.coverTitle,
         }, new UniqueEntityID(raw.id))
 
-        return journalOrError.isSuccess ? journalOrError.getValue() : null;
+        return journalOrError.isSuccess ? journalOrError.getValue() : undefined;
     }
 }
