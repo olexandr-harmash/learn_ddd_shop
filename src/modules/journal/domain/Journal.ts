@@ -14,12 +14,14 @@ import {
     UniqueEntityID
 } from "../../../shared/domain/UniqueEntityID";
 
-import { Sheet } from "./Sheet";
+import { File as FileValueObj } from "./File";
+
+import { Sheets } from "./Sheets";
 
 interface JournalProps {
-    title: string;
+    image: FileValueObj;
     author: string;
-    sheets?: Sheet[];
+    sheets?: Sheets;
     coverTitle: string;
 }
 
@@ -28,16 +30,16 @@ export class Journal extends AggregateRoot<JournalProps> {
         return this._id;
     }
 
-    get title(): string {
-        return this.props.title;
+    get image(): FileValueObj {
+        return this.props.image;
     }
 
     get author(): string {
         return this.props.author;
     }
 
-    get sheets(): Sheet[] {
-        return this.props.sheets ?? [];
+    get sheets(): Sheets {
+        return this.props.sheets ?? Sheets.create([]);
     }
 
     get coverTitle(): string {
@@ -50,7 +52,7 @@ export class Journal extends AggregateRoot<JournalProps> {
 
     public static create(props: JournalProps, id?: UniqueEntityID): Result<Journal> {
         const propsResult = Guard.againstNullOrUndefinedBulk([
-            { argument: props?.title, argumentName: 'title' },
+            { argument: props?.image, argumentName: 'image' },
             { argument: props?.author, argumentName: 'author' },
             { argument: props?.coverTitle, argumentName: 'coverTitle' },
         ]);

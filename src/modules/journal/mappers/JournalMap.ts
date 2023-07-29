@@ -14,26 +14,26 @@ export class JournalMap implements Mapper<Journal> {
     public static toDTO(journal: Journal): JournalDTO {
         return {
             id: journal.id.toValue(),
-            title: journal.title,
+            title: journal.image.filePath,
             author: journal.author,
             coverTitle: journal.coverTitle,
-            sheets: journal.sheets.map(SheetMap.toDTO)
+            sheets: journal.sheets.getItems().map(SheetMap.toDTO)
         }
     }
 
     public static toPersistence(journal: Journal): any {
         return {
             id: journal.id.toString(),
-            title: journal.title,
+            title: journal.image.filePath,
             author: journal.author,
             coverTitle: journal.coverTitle,
-            sheets: journal.sheets.map(SheetMap.toPersistence)
+            sheets: journal.sheets.getItems().map(SheetMap.toPersistence)
         }
     }
 
     public static toDomain(raw: any): Journal | undefined {
         const journalOrError = Journal.create({
-            title: raw.title,
+            image: raw.filePath,
             sheets: raw.sheets.map(SheetMap.toDomain),
             author: raw.author,
             coverTitle: raw.coverTitle,

@@ -22,12 +22,15 @@ export class CreateJournalController extends BaseController {
     }
 
     private isValidCreateSheetDTO(dto: CreateSheetDTO): boolean {
-        return typeof dto.fileName === 'string' && typeof dto.pageNumber === 'number' && dto.pageNumber >= 0;
+        return (
+            Buffer.isBuffer(dto.byteArray) &&
+            typeof dto.pageNumber === 'number' && dto.pageNumber >= 0
+        );
     }
 
     private isValidCreateJournalDTO(dto: CreateJournalDTO): boolean {
         return (
-            typeof dto.title === 'string' &&
+            Buffer.isBuffer(dto.byteArray) &&
             typeof dto.author === 'string' &&
             typeof dto.coverTitle === 'string' &&
             Array.isArray(dto.sheets) && dto.sheets.every((sheet) => this.isValidCreateSheetDTO(sheet))

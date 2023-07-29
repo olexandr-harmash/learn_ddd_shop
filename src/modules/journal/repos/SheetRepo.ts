@@ -2,6 +2,7 @@ import { Sheet } from "../domain/Sheet";
 
 
 export interface ISheetRepo {
-    exists(sheetId: number): Promise<boolean>;
-    saveCollection(sheet: Sheet[], journalId: string): Promise<Sheet[]>;
+    exists(sheetId: string): Promise<boolean>;
+    saveCollection(sheet: Sheet[], journalId: string): Promise<void>;
+    save(journal: Sheet, journalId: string): Promise<void>;
 }

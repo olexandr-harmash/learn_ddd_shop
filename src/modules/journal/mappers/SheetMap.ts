@@ -12,7 +12,7 @@ export class SheetMap implements Mapper<Sheet> {
     public static toDTO(sheet: Sheet): SheetDTO {
         return {
             id: sheet.id.toString(),
-            fileName: sheet.fileName,
+            fileName: sheet.image.filePath,
             pageNumber: sheet.pageNumber,
         }
     }
@@ -20,14 +20,14 @@ export class SheetMap implements Mapper<Sheet> {
     public static toPersistence(sheet: Sheet): any {
         return {
             id: sheet.id.toString(),
-            fileName: sheet.fileName,
+            fileName: sheet.image.filePath,
             pageNumber: sheet.pageNumber,
         }
     }
 
     public static toDomain(raw: any): Sheet | undefined {
         const sheetOrError = Sheet.create({
-            fileName: raw.fileName,
+            image: raw.filePath,
             pageNumber: raw.pageNumber
         }, new UniqueEntityID(raw.id))
 

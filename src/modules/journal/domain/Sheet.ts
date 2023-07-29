@@ -12,9 +12,10 @@ import {
     UniqueEntityID
 } from "../../../shared/domain/UniqueEntityID";
 
+import { File as FileValueObj } from "./File";
 
 interface SheetProps {
-    fileName: string;
+    image: FileValueObj;
     pageNumber: number;
 }
 
@@ -23,8 +24,8 @@ export class Sheet extends Entity<SheetProps> {
         return this._id;
     }
 
-    get fileName(): string {
-        return this.props.fileName;
+    get image(): FileValueObj {
+        return this.props.image;
     }
 
     get pageNumber(): number {
@@ -37,7 +38,7 @@ export class Sheet extends Entity<SheetProps> {
 
     public static create(props: SheetProps, id?: UniqueEntityID): Result<Sheet> {
         const propsResult = Guard.againstNullOrUndefinedBulk([
-            { argument: props?.fileName, argumentName: 'fileName' },
+            { argument: props?.image, argumentName: 'fileName' },
             { argument: props?.pageNumber, argumentName: 'pageNumber' },
         ]);
 

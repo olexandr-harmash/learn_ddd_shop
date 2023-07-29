@@ -1,10 +1,10 @@
 interface CreateSheetDTO {
-    fileName: string;
+    byteArray: Buffer;
     pageNumber: number;
 }
 
 interface CreateJournalDTO {
-    title: string;
+    byteArray: Buffer;
     author: string;
     sheets: CreateSheetDTO[];
     coverTitle: string;
