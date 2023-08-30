@@ -1,0 +1,25 @@
+body {
+}
+
+img {
+    width: 1000px;
+    height: 100px;
+}
+
+.content {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+header {
+}
+
+footer {
+    background-color: brown;
+}
+
+main {
+    background-color: blueviolet;
+}

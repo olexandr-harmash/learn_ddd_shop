@@ -29,7 +29,7 @@ services:
   nginx:
     image: nginx
     volumes:
-     - ../static:/usr/share/nginx/html/
+     - ./static:/usr/share/nginx/html/
      - ./nginx:/etc/nginx/templates
     ports:
      - "8081:80"

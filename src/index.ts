@@ -1,6 +1,6 @@
 // Infra
 
-import "./shared/infra/http/app"
+import "./shared/infra/http/"
 
 import dbInit from "./shared/infra/database/sequelize"
 
