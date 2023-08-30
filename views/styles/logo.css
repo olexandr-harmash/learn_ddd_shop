@@ -1,0 +1,21 @@
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  height: 100%;
+  width: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 0 0 20px;
+}
+
+.logo a {
+  width: 70px;
+  height: 42px;
+}
+
+.logo img {
+  width: 70px;
+  height: 42px;
+}

@@ -19,13 +19,27 @@ app.set('view engine', process.env.VIEW_ENGINE ?? 'ejs');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors(origin))
-app.use(helmet())
+app.use(
+    helmet.contentSecurityPolicy({
+      useDefaults: true,
+      directives: {
+        imgSrc: [
+            `'self'`,
+            `data:`,
+            `*.domain.nl`,
+            `*.amazonaws.com`,
+            `http://localhost:8081/`
+          ],
+      },
+      
+    })
+  )
 app.use(morgan('combined'))
 app.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 },
 }));
 
-app.use(express.static(process.env.VIEW_DIR ?? 'views'));
+app.use('/views', express.static(process.env.VIEW_DIR ?? 'views'));
 
 const port = process.env.PORT || 3000;
 

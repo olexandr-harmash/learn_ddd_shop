@@ -1,0 +1,9 @@
+<div class="catalog">
+  <% for(var i = 0; i < goods.length; i++) {%>
+  <div class="card-container">
+    <%- include('../partials/card', {img: goods[i].img, sale: goods[i].sale,
+    prevValue: goods[i].prevValue, currValue: goods[i].currValue, name:
+    goods[i].name}); %>
+  </div>
+  <%}%>
+</div>

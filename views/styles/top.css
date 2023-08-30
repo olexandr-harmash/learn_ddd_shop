@@ -1,0 +1,38 @@
+.top {
+  height: 32px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top__nav-list {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.top__nav-list li {
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.top__nav-link {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  text-transform: lowercase;
+  color: rgba(0, 0, 0, 0.705);
+  letter-spacing: 1.1px;
+}
+
+@media screen and (max-width: 640px) {
+  .top {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .top {
+    display: none;
+  }
+}
