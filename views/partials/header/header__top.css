@@ -1,0 +1,31 @@
+.header-top__list {
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.header-top__list {
+    min-height: 32px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: AdihausDIN,Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 17px;
+    color: #000;
+    font-weight: 400;
+}
+
+.header-top__list li {
+    white-space: nowrap; /* Запрещаем перенос слов */
+    margin-left: 10px;
+    padding: 0 10px;
+}
+
+.header-top__list a {
+    color: inherit;
+    /* blue colors for links too */
+    text-decoration: inherit;
+    /* no underline */
+}
