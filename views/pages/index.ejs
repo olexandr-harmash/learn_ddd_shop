@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src http://localhost:8081/; child-src 'none';" />
+  <link rel="stylesheet" href="/views/styles/index.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="content">
+    <header>
+      <div class="logo-container"><%- include('../partials/logo'); %></div>
+      <div class="top-container"><%- include('../partials/top'); %></div>
+      <div class="bottom-container">
+        <%- include('../partials/bottom'); %>
+      </div>
+    </header>
+    <main>
+      <div class="filter-container">
+        <%- include('../partials/filter', {baseURL: "http://domain" }); %>
+      </div>
+      <div class="catalog-container">
+        <%- include('../partials/catalog', {goods: goods}); %>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <%- include('../partials/footer'); %>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

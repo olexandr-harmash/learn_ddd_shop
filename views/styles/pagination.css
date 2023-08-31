@@ -1,0 +1,16 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pagination__page {
+  width: auto;
+  height: 30px;
+  padding: 0 10px;
+  margin-left: 15px;
+}
+
+.pagination__count {
+  padding-left: 10px;
+}

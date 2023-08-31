@@ -1,0 +1,40 @@
+@import url(./pagination.css);
+
+.filter {
+}
+
+.filter__form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter__pagination {
+  padding-left: 15px;
+}
+
+.filter__variants {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.filter__form {
+  display: flex;
+  flex-direction: row;
+}
+
+.filter__select {
+  background-color: #ebedee;
+  width: auto;
+  height: 30px;
+  margin-right: 10px;
+  padding: 0px 10px;
+  border: none;
+}
+
+@media screen and (max-width: 600px) {
+  .filter {
+    display: none;
+  }
+}

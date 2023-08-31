@@ -1,0 +1,10 @@
+<div class="pagination">
+  <p class="pagination__text">Page</p>
+  <select class="pagination__page" id="page" name="page">
+    <option value="<%= page %>" selected><%- page %></option>
+    <% for(var i = 2; i <= pages; i++) {%>
+    <option value="<%= i %>"><%- i %></option>
+    <%}%>
+  </select>
+  <p class="pagination__count">from <%- pages %></p>
+</div>

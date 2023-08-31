@@ -1,0 +1,21 @@
+@import url(./card.css);
+
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(4, 24%);
+  align-content: space-between;
+  justify-content: space-around;
+  row-gap: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .catalog {
+    grid-template-columns: repeat(2, 49%);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .catalog {
+    grid-template-columns: repeat(1, 99%);
+  }
+}

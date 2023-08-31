@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card__header">
+    <img class="card__image" src="<%- img%>" alt="" />
+    <% if(sale) { %>
+    <p class="card__sale">-<%-sale%>%</p>
+    <%}%>
+    <% if(prevValue) { %>
+    <div class="card__values-wrapper">
+      <p class="card__price card__prev-value"><%-prevValue%> грн.</p>
+      <p class="card__price card__curr-value"><%-currValue%> грн.</p>
+    </div>
+    <%} else {%>
+    <p class="card__price card__value"><%-currValue%> грн.</p>
+    <%}%>
+  </div>
+  <div class="card__name">
+    <p><%-name%></p>
+  </div>
+</div>

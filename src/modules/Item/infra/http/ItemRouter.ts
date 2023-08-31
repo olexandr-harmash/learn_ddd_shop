@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { createCategoryController, createItemController, getItemCardListController, getItemDetailController } from '../../useCases/item';
+import { createCategoryController, createItemController, getItemCardListController, getItemCardListPageController, getItemDetailController } from '../../useCases/item';
 
 const ItemRouter = express.Router();
 

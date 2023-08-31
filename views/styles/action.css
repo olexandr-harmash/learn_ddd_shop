@@ -1,0 +1,71 @@
+/* Styling for the search bar container */
+.action-search {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Styling for the input container */
+.input {
+  width: auto;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Aligns content to the right */
+}
+
+/* Styling for the search input wrapper */
+.input__search-wrapper {
+  height: 34px;
+  min-width: 110px;
+  max-width: 270px;
+  width: calc(15vw - 30px);
+  position: relative;
+}
+
+/* Styling for the search icon within the input */
+.input__icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 8px;
+  margin: auto;
+}
+
+/* Styling for the search input field */
+.input__field {
+  width: 100%;
+  height: 100%;
+  padding: 0 32px 0 11px;
+  background: #ebedee;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+/* Styling for action containers */
+.action {
+  height: 48px;
+  max-width: 48px;
+  min-width: 24px;
+  flex: 1;
+}
+
+/* Styling for action link */
+.action__link {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styling for action icons */
+.action__icon {
+  width: 24px;
+  height: 24px;
+}

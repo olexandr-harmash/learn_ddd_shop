@@ -23,6 +23,7 @@ export class ItemRepositoryImpl implements IItemRepository {
         throw new Error("Method not implemented.");
     }
 
+    //TODO return amount of values
     async getItemCardList(filter: GetItemCardListFilters): Promise<ItemList> {
         const ItemModel = this.models.Item;
         const baseQuery = this.createBaseQuery(filter.limit, filter.offset);

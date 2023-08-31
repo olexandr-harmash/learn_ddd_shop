@@ -1,0 +1,22 @@
+<div class="filter">
+  <form class="filter__form" action="http://localhost:3000/clothes/man/catalog" method="GET">
+    <div class="filter__variants">
+      <!-- TODO values from template -->
+      <select class="filter__select" id="size" name="size">
+        <option value="" disabled selected>Size</option>
+        <option value="7ae41fa1-955d-4591-81a5-8476e2b7a82e">XL</option>
+        <option value="7ae41fa1-955d-4591-81a5-8476e2b7a83d">L</option>
+      </select>
+      <select class="filter__select" id="color" name="color">
+        <option value="" disabled selected>Color</option>
+        <option value="7ae41fa1-955d-4591-81a5-8476e2b7a82f">red</option>
+      </select>
+    </div>
+    <div class="filter__button">
+      <button>refresh</button>
+    </div>
+    <div class="filter__pagination">
+      <%- include('../partials/pagination', {pages: 10, page: 1}); %>
+    </div>
+  </form>
+</div>
